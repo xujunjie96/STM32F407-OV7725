@@ -12,3 +12,4 @@ DCMI_DMA_Init((u32)&LCD->LCD_RAM,1,DMA_MemoryDataSize_HalfWord,DMA_MemoryInc_Dis
 上一句是图像存储在img数组中，下一句是直接显示在lcd上<br>
 4.采集分辨率为120*160 考虑到stm32f4的ram大小<br>
 5.注意文档的编码<br>
+6.使用并参考修改了正点原子以及也获得代码
