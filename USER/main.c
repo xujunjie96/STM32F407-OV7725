@@ -15,43 +15,43 @@ u8 key;
 int main(void)
 { 
 	u32 i ;
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//ÉèÖÃÏµÍ³ÖĞ¶ÏÓÅÏÈ¼¶·Ö×é2
-	delay_init(168);  //³õÊ¼»¯ÑÓÊ±º¯Êı
-	uart_init(256000);		//³õÊ¼»¯´®¿Ú²¨ÌØÂÊÎª115200
-	usart2_init(42,115200);		//³õÊ¼»¯´®¿Ú2²¨ÌØÂÊÎª115200
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//è®¾ç½®ç³»ç»Ÿä¸­æ–­ä¼˜å…ˆçº§åˆ†ç»„2
+	delay_init(168);  //åˆå§‹åŒ–å»¶æ—¶å‡½æ•°
+	uart_init(256000);		//åˆå§‹åŒ–ä¸²å£æ³¢ç‰¹ç‡ä¸º115200
+	usart2_init(42,115200);		//åˆå§‹åŒ–ä¸²å£2æ³¢ç‰¹ç‡ä¸º115200
 	MCO1_Init();
-	LED_Init();					//³õÊ¼»¯LED 
- 	LCD_Init();					//LCD³õÊ¼»¯  
- 	KEY_Init();					//°´¼ü³õÊ¼»¯ 
- 	POINT_COLOR=RED;//ÉèÖÃ×ÖÌåÎªºìÉ« 	 
-	while(OV7725_Init())//³õÊ¼»¯OV7725
+	LED_Init();					//åˆå§‹åŒ–LED 
+ 	LCD_Init();					//LCDåˆå§‹åŒ–  
+ 	KEY_Init();					//æŒ‰é”®åˆå§‹åŒ– 
+ 	POINT_COLOR=RED;//è®¾ç½®å­—ä½“ä¸ºçº¢è‰² 	 
+	while(OV7725_Init())//åˆå§‹åŒ–OV7725
 	{
 		LCD_ShowString(30,130,240,16,16,"OV7725 ERR");
 		delay_ms(200);
 	    LCD_Fill(30,130,239,170,WHITE);
 		delay_ms(200);
 	}
-	OV7725_Window_QVGA_Set(0,0,160,120);//OV7725ÉèÖÃÊä³ö´°¿Ú
+	OV7725_Window_QVGA_Set(0,0,160,120);//OV7725è®¾ç½®è¾“å‡ºçª—å£
 	//OV7725_Window_VGA_Set(160,120,320,240);
-	AutoSet_Enable(0,0,0);//×Ô¶¯ÆØ¹â¡¢×Ô¶¯°×Æ½ºâ¡¢×Ô¶¯ÔöÒæ¿ª¹Ø
-	Exposure_Set(0x0110);//ÊÖ¶¯ÆØ¹âÖµ
-	Bright_Set(0x00);//ÁÁ¶È
+	AutoSet_Enable(0,0,0);//è‡ªåŠ¨æ›å…‰ã€è‡ªåŠ¨ç™½å¹³è¡¡ã€è‡ªåŠ¨å¢ç›Šå¼€å…³
+	Exposure_Set(0x0110);//æ‰‹åŠ¨æ›å…‰å€¼
+	Bright_Set(0x00);//äº®åº¦
 	LCD_ShowString(30,130,200,16,16,"OV7725 OK"); 
 	delay_ms(500);	
-	My_DCMI_Init();			//DCMIÅäÖÃ
-//DCMI_DMA_Init((u32)img,160*120,DMA_MemoryDataSize_HalfWord,DMA_MemoryInc_Enable);//DCMI DMAÅäÖÃ 
-	DCMI_DMA_Init((u32)&LCD->LCD_RAM,1,DMA_MemoryDataSize_HalfWord,DMA_MemoryInc_Disable);//DCMI DMAÅäÖÃ  
-	DCMI_Start(); 		//Æô¶¯´«Êä
-	LCD_Scan_Dir(L2R_U2D);		   //´ÓÉÏµ½ÏÂ,´Ó×óµ½ÓÒ	
-	LCD_Set_Window(0,0,160,120); //LCDÉèÖÃÏÔÊ¾´°¿Ú£¬Èç¹ûOV7725Êä³ö·Ö±æÂÊ¸Ä±äÁË£¬ÕâÀïÒ²Òª¸Ã±í
+	My_DCMI_Init();			//DCMIé…ç½®
+	//DCMI_DMA_Init((u32)img,160*120,DMA_MemoryDataSize_HalfWord,DMA_MemoryInc_Enable);//DCMI DMAé…ç½® 
+	DCMI_DMA_Init((u32)&LCD->LCD_RAM,1,DMA_MemoryDataSize_HalfWord,DMA_MemoryInc_Disable);//DCMI DMAé…ç½®  
+	DCMI_Start(); 		//å¯åŠ¨ä¼ è¾“
+	LCD_Scan_Dir(L2R_U2D);		   //ä»ä¸Šåˆ°ä¸‹,ä»å·¦åˆ°å³	
+	LCD_Set_Window(0,0,160,120); //LCDè®¾ç½®æ˜¾ç¤ºçª—å£ï¼Œå¦‚æœOV7725è¾“å‡ºåˆ†è¾¨ç‡æ”¹å˜äº†ï¼Œè¿™é‡Œä¹Ÿè¦è¯¥è¡¨
 	LCD_SetCursor(0,0);   
-	LCD_WriteRAM_Prepare();		//¿ªÊ¼Ğ´ÈëGRAM
+	LCD_WriteRAM_Prepare();		//å¼€å§‹å†™å…¥GRAM
 	
 	
 
 	
-	DMA_Cmd(DMA2_Stream1, ENABLE);//¿ªÆôDMA2,Stream1 
-	DCMI_CaptureCmd(ENABLE);//DCMI²¶»ñÊ¹ÄÜ 
+	DMA_Cmd(DMA2_Stream1, ENABLE);//å¼€å¯DMA2,Stream1 
+	DCMI_CaptureCmd(ENABLE);//DCMIæ•è·ä½¿èƒ½ 
  	while(1)
 	{	
 
@@ -65,40 +65,41 @@ void MCO1_Init(void)
 {
 
 	GPIO_InitTypeDef GPIO_InitStructure;        
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);//Ê¹ÄÜGPIOAµÄÊ±ÖÓ  
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8; //Ñ¡Ôñ¹Ü½ÅºÅ  
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;// ÉèÖÃ¹Ü½ÅµÄËÙ¶ÈÎª100M  
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF; //ÉèÖÃ¹Ü½ÅÎ»¸´ÓÃ¹¦ÄÜ  
-  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;//ÉèÖÃ¹Ü½ÅÎ»ÍÆÍêÊä³ö  
-  GPIO_Init(GPIOA, &GPIO_InitStructure); //³õÊ¼»¯¹Ü½Å  
-  GPIO_PinAFConfig(GPIOA,GPIO_PinSource8,GPIO_AF_MCO);//´ò¿ªGPIOA_Pin_9µÄMCO¹¦ÄÜ  
-  RCC_MCO1Config(RCC_MCO1Source_HSE,RCC_MCO2Div_1);//ÉèÖÃGPIOA_Pin_8Êä³öÍâ²¿¸ßËÙ¾§ÕñHSEµÄÆµÂÊ  
-	//RCC_MCO1Config(RCC_MCO1Source_HSE,RCC_MCO1Div_2);//ÉèÖÃGPIOA_Pin_8Êä³öÍâ²¿¸ßËÙ¾§ÕñHSEµÄÆµÂÊ 
+	  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);//ä½¿èƒ½GPIOAçš„æ—¶é’Ÿ  
+	  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8; //é€‰æ‹©ç®¡è„šå·  
+	  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;// è®¾ç½®ç®¡è„šçš„é€Ÿåº¦ä¸º100M  
+	  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF; //è®¾ç½®ç®¡è„šä½å¤ç”¨åŠŸèƒ½  
+	  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;//è®¾ç½®ç®¡è„šä½æ¨å®Œè¾“å‡º  
+	  GPIO_Init(GPIOA, &GPIO_InitStructure); //åˆå§‹åŒ–ç®¡è„š  
+	  GPIO_PinAFConfig(GPIOA,GPIO_PinSource8,GPIO_AF_MCO);//æ‰“å¼€GPIOA_Pin_9çš„MCOåŠŸèƒ½  
+	  RCC_MCO1Config(RCC_MCO1Source_HSE,RCC_MCO2Div_1);//è®¾ç½®GPIOA_Pin_8è¾“å‡ºå¤–éƒ¨é«˜é€Ÿæ™¶æŒ¯HSEçš„é¢‘ç‡  
+	//RCC_MCO1Config(RCC_MCO1Source_HSE,RCC_MCO1Div_2);//è®¾ç½®GPIOA_Pin_8è¾“å‡ºå¤–éƒ¨é«˜é€Ÿæ™¶æŒ¯HSEçš„é¢‘ç‡ 
 
 }
 
 
 void DMA2_Stream1_IRQHandler(void)
-{   u32 a,b;     
-	if(DMA_GetFlagStatus(DMA2_Stream1,DMA_FLAG_TCIF1)==SET)//DMA2_Steam1,´«ÊäÍê³É±êÖ¾
+{  
+	u32 a,b;     
+	if(DMA_GetFlagStatus(DMA2_Stream1,DMA_FLAG_TCIF1)==SET)//DMA2_Steam1,ä¼ è¾“å®Œæˆæ ‡å¿—
 	{  
-		 DMA_ClearFlag(DMA2_Stream1,DMA_FLAG_TCIF1);//Çå³ı´«ÊäÍê³ÉÖĞ¶Ï
+		 DMA_ClearFlag(DMA2_Stream1,DMA_FLAG_TCIF1);//æ¸…é™¤ä¼ è¾“å®Œæˆä¸­æ–­
 		finish_fiag=1;
 //		    DCMI_Stop();
 //	
-//      uart_putbuff(USART1, cmdf, sizeof(cmdf));    //ÏÈ·¢ËÍÃüÁî
+//      uart_putbuff(USART1, cmdf, sizeof(cmdf));    //å…ˆå‘é€å‘½ä»¤
 //      for(a=0;a<120;a++)
 //		{
 //			for(b=0;b<160;b++)
 //			{
-//////      uart_putbuff(USART1, img[a], 1); //ÔÙ·¢ËÍÍ¼Ïñ
+//////      uart_putbuff(USART1, img[a], 1); //å†å‘é€å›¾åƒ
 ////			printf("%c",img[a][b]>>24);
 ////				printf("%c",img[a][b]>>16);
 //				printf("%c",img[a][b]>>8);
 //				printf("%c",img[a][b]);
 //			}
 //		}
-//      uart_putbuff(USART1, cmdr, sizeof(cmdr));    //ÏÈ·¢ËÍÃüÁî
+//      uart_putbuff(USART1, cmdr, sizeof(cmdr));    //å…ˆå‘é€å‘½ä»¤
 //		LED0=!LED0;
 //			datanum++;
 //		DCMI_Start();	
