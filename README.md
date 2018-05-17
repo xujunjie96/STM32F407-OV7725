@@ -4,7 +4,9 @@
 3.<br>
 ```c
 //DCMI_DMA_Init((u32)img,160*120,DMA_MemoryDataSize_HalfWord,DMA_MemoryInc_Enable);//DCMI DMA配置 
+```
 ```c
 DCMI_DMA_Init((u32)&LCD->LCD_RAM,1,DMA_MemoryDataSize_HalfWord,DMA_MemoryInc_Disable);//DCMI DMA配置  
+```
 上一句是图像存储在img数组中，下一句是直接显示在lcd上<br>
 4.采集分辨率为120*160 考虑到stm32f4的ram大小<br>
